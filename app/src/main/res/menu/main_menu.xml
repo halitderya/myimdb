@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single"  android:id="@+id/primarygroup">
+        <item android:title="@string/select_an_item">
+            <menu>
+                <item android:id="@+id/navhome"
+                    android:icon="@drawable/baseline_access_alarms_24"
+                    android:title="@string/home_page" />
+                <item android:id="@+id/navfind"
+                    android:icon="@drawable/search_icon"
+                    android:title="@string/find_record" />
+                <item android:id="@+id/navadd"
+                    android:icon="@drawable/add_icon"
+                    android:title="@string/add_record" />
+                <item android:id="@+id/navedit"
+                    android:icon="@drawable/edit_icon"
+                    android:title="@string/edit_record" />
+                <item android:id="@+id/navdelete"
+                    android:icon="@drawable/delete_icon"
+                    android:title="@string/delete_record" />
+
+            </menu>
+
+        </item>
+
+    </group>
+
+
+
+    <group android:checkableBehavior="single"  android:id="@+id/secondarygroup" android:menuCategory="secondary">
+        <item android:title="@string/more">
+<menu>
+    <item android:id="@+id/navhelp"
+        android:icon="@drawable/help"
+        android:title="@string/help"
+
+        />
+
+    <item android:id="@+id/navabout"
+        android:icon="@drawable/about"
+        android:title="@string/about" />
+</menu>
+
+        </item>
+
+
+
+    </group>
+</menu>

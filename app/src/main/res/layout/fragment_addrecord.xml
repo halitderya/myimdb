@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/fieldName"
+        android:textSize="16sp"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/film_name"
+        tools:ignore="LabelFor" />
+    <EditText
+        android:id="@+id/fieldGenre"
+        android:textSize="16sp"
+        android:hint="@string/film_genre"
+
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         />
+    <EditText
+        android:id="@+id/fieldYear"
+        android:textSize="16sp"
+        android:inputType="number"
+        android:hint="@string/film_relase_year"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      />
+    <EditText
+        android:id="@+id/fieldPlot"
+        android:textSize="16sp"
+        android:hint="@string/film_plot"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text" />
+    <TextView
+        android:id="@+id/space"
+        android:textSize="36sp"
+android:enabled="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text=""
+        />
+<Button
+    android:id="@+id/filmSave"
+    android:layout_width="match_parent"
+    android:textSize="32sp"
+android:text="@string/save_film"
+    android:layout_height="100dp"/>
+
+
+</LinearLayout>

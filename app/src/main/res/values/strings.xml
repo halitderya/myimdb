@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MyIMDB</string>
+    <string name="open">Open Navigation</string>
+    <string name="close">Close Navigation</string>
+    <string name="home_page">Home Page</string>
+    <string name="find_record">Find Record</string>
+    <string name="add_record">Add Record</string>
+    <string name="edit_record">Edit Record</string>
+    <string name="delete_record">Delete Record</string>
+    <string name="select_an_item">Select an item</string>
+    <string name="more">More...</string>
+    <string name="help">Help</string>
+    <string name="about">About</string>
+    <string name="about_info_first">Version 1.0.1 This App made by Halit Derya as a school project</string>
+    <string name="save_film">Save Film</string>
+    <string name="film_relase_year">Film Relase Year</string>
+    <string name="film_genre">Film Genre</string>
+    <string name="film_name">Film Name</string>
+    <string name="film_plot">Film Plot</string>
+
+</resources>
