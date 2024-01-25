@@ -32,6 +32,15 @@
         android:layout_height="wrap_content"
       />
     <EditText
+        android:id="@+id/fieldDirector"
+        android:textSize="16sp"
+        android:inputType="text"
+        android:hint="Film Director"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <EditText
         android:id="@+id/fieldPlot"
         android:textSize="16sp"
         android:hint="@string/film_plot"

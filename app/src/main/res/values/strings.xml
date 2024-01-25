@@ -17,5 +17,7 @@
     <string name="film_genre">Film Genre</string>
     <string name="film_name">Film Name</string>
     <string name="film_plot">Film Plot</string>
+    <string name="delete_film">Delete Film</string>
+    <string name="delete_all">Delete all data</string>
 
 </resources>

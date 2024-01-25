@@ -1,150 +1,110 @@
 package com.example.myimdb;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.CursorAdapter;
+import android.widget.ListView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
+
 public class MainFragment extends Fragment {
 
     private SQLiteHelper sqh;
-    private LinearLayout mainContainer;
-
-
+    private ListView listView;
+    private FilmCursorAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        mainContainer = view.findViewById(R.id.mainContainer);
-
-
+        listView = view.findViewById(R.id.listView);
         sqh = new SQLiteHelper(getActivity());
-        loadData();
+
+        Cursor cursor = sqh.getData();
+        adapter = new FilmCursorAdapter(getActivity(), cursor);
+        listView.setAdapter(adapter);
+
+        setupSearchView(view);
 
         return view;
     }
 
-    private void loadData() {
-        Cursor cursor = sqh.getData();
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-
-                String name = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.NAME));
-                String genre = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.GENRE));
-                String year = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.YEAR));
-                String plot = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.PLOT));
+    private void setupSearchView(View view) {
+        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
 
-                TextView nameTextView = new TextView(getContext());
-                nameTextView.setText(name);
-                ImageButton showMoreButton = new ImageButton(getContext());
-                showMoreButton.setBackground(getContext().getResources().getDrawable(R.drawable.seemore));
-
-                showMoreButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-
-
-                ImageButton editButton = new ImageButton(getContext());
-
-                editButton.setBackground(getContext().getResources().getDrawable(R.drawable.edit_icon));
-
-                LinearLayout dataRow = new LinearLayout(getContext());
-                dataRow.setOrientation(LinearLayout.HORIZONTAL);
-                dataRow.setGravity(Gravity.RIGHT);
-
-                LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(
-                        0, LinearLayout.LayoutParams.WRAP_CONTENT);
-                textViewParams.weight = 1;
-
-                LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                dataRow.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-
-                nameTextView.setTextSize(24);
-                nameTextView.setLayoutParams(textViewParams);
-                showMoreButton.setLayoutParams(buttonParams);
-
-                dataRow.addView(nameTextView);
-                dataRow.addView(showMoreButton);
-                dataRow.addView(editButton);
+                Cursor newCursor = sqh.searchData(newText);
+                adapter.changeCursor(newCursor);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
+    }
 
 
-                mainContainer.addView(dataRow);
-                LinearLayout moreContainer = new LinearLayout(getContext());
-                moreContainer.setOrientation(LinearLayout.VERTICAL);
-                moreContainer.setBackground(getContext().getResources().getDrawable(R.drawable.showmoreborder));
-                moreContainer.setVisibility(View.GONE);
-                //       moreContainer.setVisibility(View.GONE);
-                mainContainer.addView(moreContainer, mainContainer.indexOfChild(dataRow) + 1);
-                TextView genreTextView = new TextView(getContext());
-                genreTextView.setTextSize(18);
-                TextView yearTextView = new TextView(getContext());
-                yearTextView.setTextSize(18);
+    private class FilmCursorAdapter extends CursorAdapter {
+        public FilmCursorAdapter(Context context, Cursor cursor) {
+            super(context, cursor, 0);
+        }
 
-                TextView plotTextView = new TextView(getContext());
-                plotTextView.setTextSize(18);
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            return LayoutInflater.from(context).inflate(R.layout.item_film, parent, false);
+        }
 
-                TextView filmDetails = new TextView(getContext());
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            final String filmName = cursor.getString(cursor.getColumnIndexOrThrow("filmName"));
+            final String filmDirector = cursor.getString(cursor.getColumnIndexOrThrow("filmDirector"));
+            final String filmYear = cursor.getString(cursor.getColumnIndexOrThrow("filmYear"));
+            final String filmGenre = cursor.getString(cursor.getColumnIndexOrThrow("filmGenre"));
+            final String filmPlot = cursor.getString(cursor.getColumnIndexOrThrow("filmPlot"));
 
-                filmDetails.setText("Film Details");
-                filmDetails.setTextSize(20);
-                filmDetails.setTypeface(Typeface.DEFAULT_BOLD);
-                moreContainer.addView(filmDetails);
-                moreContainer.addView(genreTextView);
-                moreContainer.addView(yearTextView);
-                moreContainer.addView(plotTextView);
-
-
-                showMoreButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        genreTextView.setText("Genre : "+ genre);
-                        yearTextView.setText("Year :"+year);
-                        plotTextView.setText("Plot :"+plot);
-
-
-                        if (moreContainer.getVisibility() == View.GONE) {
-                            moreContainer.setVisibility(View.VISIBLE);
-
-                        } else {
-                            moreContainer.setVisibility(View.GONE);
-
-
-                        }
-                        float currentRotation = showMoreButton.getRotation();
-
-                        showMoreButton.setRotation(currentRotation+180);
-
-                    }
-
-                });
-
-
-
-
-
-            } while (cursor.moveToNext());
-
-            cursor.close();
+            TextView showName = view.findViewById(R.id.filmName);
+            Button showDetailsButton = view.findViewById(R.id.showDetailsButton);
+            showName.setText((filmName));
+            showDetailsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showFilmDetails(filmName, filmDirector,filmYear,filmGenre,filmPlot);
+                }
+            });
         }
     }
 
+    private void showFilmDetails(String filmName, String filmDirector, String filmYear,String filmGenre,String filmPlot) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Film Details");
+
+        String message ="\nName: " + filmName + "\n\nDirector: " + filmDirector + "\n\nYear: " + filmYear +"\n\nGenre:" +filmGenre+ "\n\nPlot:" +filmPlot;
+        builder.setMessage(message);
+
+        builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

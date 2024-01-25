@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 
 public class AddRecordFragment extends Fragment {
 
-    private EditText fieldName, fieldGenre, fieldYear, fieldPlot;
+    private EditText fieldName, fieldGenre, fieldYear, fieldPlot, fieldDirector;
     private Button filmSave;
 
     @Override
@@ -24,8 +24,10 @@ public class AddRecordFragment extends Fragment {
         fieldName = view.findViewById(R.id.fieldName);
         fieldGenre = view.findViewById(R.id.fieldGenre);
         fieldYear = view.findViewById(R.id.fieldYear);
+        fieldDirector = view.findViewById(R.id.fieldDirector);
         fieldPlot = view.findViewById(R.id.fieldPlot);
         filmSave = view.findViewById(R.id.filmSave);
+
 
         // Set onClickListener for the save button
         filmSave.setOnClickListener(new View.OnClickListener() {
@@ -44,8 +46,10 @@ public class AddRecordFragment extends Fragment {
         String year = fieldYear.getText().toString();
         String plot = fieldPlot.getText().toString();
 
+        String director= fieldDirector.getText().toString();
+
         // Create an instance of SQLiteHelper and save the data
         SQLiteHelper dbHelper = new SQLiteHelper(getActivity());
-        dbHelper.addData(name, genre, year, plot); // Assuming addData() method is modified to accept these parameters
+        dbHelper.addData(name, genre, year, plot,director); // Assuming addData() method is modified to accept these parameters
     }
 }

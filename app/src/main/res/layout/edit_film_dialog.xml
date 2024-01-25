@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <EditText
+        android:id="@+id/editfilmID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:hint="Film ID"
+        android:visibility="gone"
+        android:inputType="number"/>
+    <EditText
+        android:id="@+id/editFilmName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Film Name"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/editFilmDirector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Director"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/editFilmGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Genre"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/editFilmYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Year"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/editFilmPlot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Plot"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:gravity="top"/>
+
+</LinearLayout>
