@@ -10,9 +10,11 @@
         android:textSize="16sp"
         android:inputType="text"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:hint="@string/film_name"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        android:autofillHints="" />
     <EditText
         android:id="@+id/fieldGenre"
         android:textSize="16sp"
@@ -21,7 +23,7 @@
         android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         />
+        android:autofillHints="" />
     <EditText
         android:id="@+id/fieldYear"
         android:textSize="16sp"
@@ -30,16 +32,16 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-      />
+        android:autofillHints="" />
     <EditText
         android:id="@+id/fieldDirector"
         android:textSize="16sp"
         android:inputType="text"
-        android:hint="Film Director"
+        android:hint="@string/film_director"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:autofillHints="" />
     <EditText
         android:id="@+id/fieldPlot"
         android:textSize="16sp"
@@ -47,7 +49,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" />
+        android:inputType="text"
+        android:autofillHints="" />
     <TextView
         android:id="@+id/space"
         android:textSize="36sp"
@@ -59,10 +62,11 @@ android:enabled="false"
         />
 <Button
     android:id="@+id/filmSave"
-    android:layout_width="match_parent"
-    android:textSize="32sp"
+    android:layout_width="200sp"
+    android:textSize="24sp"
+    android:layout_gravity="center"
 android:text="@string/save_film"
-    android:layout_height="100dp"/>
+    android:layout_height="60dp"/>
 
 
 </LinearLayout>

@@ -8,27 +8,55 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/App_about"
+        android:id="@+id/AppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textStyle="bold"
         android:textSize="30sp" />
+    <TextView
+        android:enabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/AppName"
+        android:id="@+id/AppVer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_info_first"
-        android:textSize="22sp" />
+        android:text=""
+        android:textSize="20sp" />
+    <TextView
+        android:enabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/AppMoreInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_app"
+        android:textSize="16sp" />
+    <TextView
+        android:enabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/beforeactor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/here_is_information_about_the_actor"
+        android:textSize="16sp" />
+    <TextView
+        android:enabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
     <TextView
         android:id="@+id/webScrabText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="scrabbing comes here"
+        android:text="Scrabbing Placeholder"
         tools:ignore="MissingConstraints" />
 </LinearLayout>

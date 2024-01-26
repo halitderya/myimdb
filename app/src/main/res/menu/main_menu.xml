@@ -4,7 +4,7 @@
         <item android:title="@string/select_an_item">
             <menu>
                 <item android:id="@+id/navhome"
-                    android:icon="@drawable/baseline_access_alarms_24"
+                    android:icon="@drawable/home"
                     android:title="@string/home_page" />
                 <item android:id="@+id/navadd"
                     android:icon="@drawable/add_icon"

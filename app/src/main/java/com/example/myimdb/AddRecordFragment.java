@@ -48,8 +48,45 @@ public class AddRecordFragment extends Fragment {
 
         String director= fieldDirector.getText().toString();
 
-        // Create an instance of SQLiteHelper and save the data
-        SQLiteHelper dbHelper = new SQLiteHelper(getActivity());
-        dbHelper.addData(name, genre, year, plot,director); // Assuming addData() method is modified to accept these parameters
+
+        if(CheckAllFields()) {
+
+                SQLiteHelper dbHelper = new SQLiteHelper(getActivity());
+                dbHelper.addData(getActivity(), name, genre, year, plot, director); // Assuming addData() method is modified to accept these parameters
+
+
+
+        }
     }
+
+
+    private boolean CheckAllFields() {
+        if (fieldName.length() == 0) {
+            fieldName.setError("Name is required");
+            return false;
+        }
+
+        if (fieldGenre.length() == 0) {
+            fieldGenre.setError("Genre is required");
+            return false;
+        }
+
+        if (fieldYear.length() == 0) {
+            fieldYear.setError("Year is required");
+            return false;
+        }
+
+        if (fieldDirector.length() == 0) {
+            fieldDirector.setError("Director is required");
+            return false;
+        }
+        if (fieldPlot.length() < 20) {
+            fieldPlot.setError("Plot must be minimum 20 Characters");
+            return false;
+        }
+
+        return true;
+    }
+
+
 }

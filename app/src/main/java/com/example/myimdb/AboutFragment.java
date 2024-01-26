@@ -1,4 +1,5 @@
 package com.example.myimdb;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,17 +15,29 @@ import java.net.URL;
 
 public class AboutFragment extends Fragment {
 
-    private TextView textView;
+    private TextView ScrabTextView;
+    private TextView AppverView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
-        textView = view.findViewById(R.id.webScrabText); // Ensure you have a TextView with this ID in your layout
+        ScrabTextView = view.findViewById(R.id.webScrabText); // Ensure you have a TextView with this ID in your layout
+       AppverView= view.findViewById(R.id.AppVer);
+
+
         scrapeWebPage("https://en.wikipedia.org/wiki/Arnold_Schwarzenegger");
 
-        return view;
+
+        String versionName = null;
+        try {
+            versionName = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        AppverView.setText(getString(R.string.app_version)+versionName);
+return view;
     }
 
     private void scrapeWebPage(final String urlString) {
@@ -59,7 +72,7 @@ public class AboutFragment extends Fragment {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            textView.setText(plainText); // Set text to TextView
+                            ScrabTextView.setText(plainText); // Set text to TextView
                         }
                     });
 

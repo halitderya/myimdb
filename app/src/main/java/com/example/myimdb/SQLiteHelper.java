@@ -53,7 +53,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     // CRUD Operations
 
     // Add data
-    public void addData(String name, String genre, String year, String plot,String director) {
+    public void addData(Context context,String name, String genre, String year, String plot,String director) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NAME, name);
@@ -62,8 +62,41 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(PLOT, plot);
         values.put(DIRECTOR,director);
 
+/*
         db.insert(TABLE_NAME, null, values);
+*/
+
+        long numRowsUpdated =  db.insert(TABLE_NAME, null, values);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        if(numRowsUpdated>-1){
+            builder.setTitle("Update Success")
+
+                    .setMessage("One row updated.")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+        }
+        else{
+
+            builder.setTitle("Update Error")
+
+                    .setMessage("Unsuccessful")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+        }
+
+        AlertDialog updateDialog = builder.create();
+        updateDialog.show();
         db.close();
+
+
+
     }
 
     public Cursor getData() {
@@ -87,7 +120,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         int numRowsUpdated = db.update(TABLE_NAME, values, ID + " = ?", new String[]{String.valueOf(id)});
 
-        // For debugging: Display the number of rows updated
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Update Status")
                 .setMessage(numRowsUpdated + " rows updated.")
@@ -98,15 +130,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 });
         AlertDialog updateDialog = builder.create();
         updateDialog.show();
-
-
-
-        db.update(TABLE_NAME, values, id + " = ?", new String[]{String.valueOf(id)});
         db.close();
     }
 
 
-    // Delete data
     public void deleteData(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, ID + " = ?", new String[]{String.valueOf(id)});
