@@ -55,21 +55,22 @@ return view;
                     while ((line = reader.readLine()) != null) {
                         if (line.contains("<p>") && !firstParagraphFound) {
                             firstParagraphFound = true;
+                            line = line.substring(line.indexOf("<p>"));
                         }
                         if (firstParagraphFound) {
-                            firstParagraph.append(line).append("\n");
                             if (line.contains("</p>")) {
+                                firstParagraph.append(line, 0, line.indexOf("</p>") + 4);
                                 break;
+                            } else {
+                                firstParagraph.append(line).append("\n");
                             }
                         }
                     }
                     reader.close();
 
-                    // Extract text from HTML
-                    final String plainText = android.text.Html.fromHtml(firstParagraph.toString()).toString();
+                    final String plainText = android.text.Html.fromHtml(firstParagraph.toString()).toString().trim();
 
-                    // Update UI on the main thread
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
                             ScrabTextView.setText(plainText); // Set text to TextView
@@ -82,5 +83,7 @@ return view;
             }
         }).start();
     }
+
+
 
 }
