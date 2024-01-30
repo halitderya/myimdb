@@ -26,5 +26,6 @@
     <string name="edit_record_edits_a_record">Edit Record- Edits a record.</string>
     <string name="delete_deletes_a_movie_from_the_database">Delete - Deletes a Movie from the database.</string>
     <string name="email_to_developer">Email to Developer</string>
+    <string name="nothing_to_view_yet_please_add_a_record_first">Nothing to view yet, please add a record first.</string>
 
 </resources>

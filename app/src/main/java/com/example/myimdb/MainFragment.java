@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 public class MainFragment extends Fragment {
 
     private SQLiteHelper sqh;
+    private TextView textViewempty;
     private ListView listView;
     private FilmCursorAdapter adapter;
 
@@ -31,10 +32,21 @@ public class MainFragment extends Fragment {
         listView = view.findViewById(R.id.listView);
         sqh = new SQLiteHelper(getActivity());
 
+
         Cursor cursor = sqh.getData();
         adapter = new FilmCursorAdapter(getActivity(), cursor);
         listView.setAdapter(adapter);
+        textViewempty = view.findViewById(R.id.emptytexview);
 
+        if (textViewempty != null) {
+            if (cursor.getCount() == 0) {
+                // Cursor is empty, set the emptyTextView's visibility to VISIBLE
+                textViewempty.setVisibility(View.VISIBLE);
+            } else {
+                // Cursor has data, set the emptyTextView's visibility to GONE
+                textViewempty.setVisibility(View.GONE);
+            }
+        }
         setupSearchView(view);
 
         return view;
@@ -71,6 +83,7 @@ public class MainFragment extends Fragment {
             return LayoutInflater.from(context).inflate(R.layout.item_film, parent, false);
         }
 
+
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             final String filmName = cursor.getString(cursor.getColumnIndexOrThrow("filmName"));
@@ -81,14 +94,20 @@ public class MainFragment extends Fragment {
 
             TextView showName = view.findViewById(R.id.filmName);
             Button showDetailsButton = view.findViewById(R.id.showDetailsButton);
-            showName.setText((filmName));
+            showName.setText(filmName);
+
+
+
             showDetailsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFilmDetails(filmName, filmDirector,filmYear,filmGenre,filmPlot);
+                    showFilmDetails(filmName, filmDirector, filmYear, filmGenre, filmPlot);
                 }
             });
         }
+
+
+
     }
 
     private void showFilmDetails(String filmName, String filmDirector, String filmYear,String filmGenre,String filmPlot) {
