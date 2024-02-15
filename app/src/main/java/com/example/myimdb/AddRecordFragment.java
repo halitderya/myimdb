@@ -52,7 +52,7 @@ public class AddRecordFragment extends Fragment {
         if(CheckAllFields()) {
 
                 SQLiteHelper dbHelper = new SQLiteHelper(getActivity());
-                dbHelper.addData(getActivity(), name, genre, year, plot, director); // Assuming addData() method is modified to accept these parameters
+                dbHelper.addData(getActivity(), name, genre, year, plot, director);
 
 
 

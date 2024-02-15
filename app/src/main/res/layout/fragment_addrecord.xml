@@ -29,7 +29,6 @@
         android:textSize="16sp"
         android:inputType="number"
         android:hint="@string/film_relase_year"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="" />

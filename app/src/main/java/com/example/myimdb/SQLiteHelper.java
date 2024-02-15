@@ -30,11 +30,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableQuery = "CREATE TABLE " + TABLE_NAME + " ("
                 + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + NAME + " VARCHAR(255), "
-                + YEAR + " VARCHAR(255), "
-                + GENRE + " VARCHAR(255), "
-                + PLOT + " VARCHAR(255), "
-                + DIRECTOR + " VARCHAR(255));";
+                + NAME + " VARCHAR(255) NOT NULL, "
+                + YEAR + " VARCHAR(255) NOT NULL, "
+                + GENRE + " VARCHAR(255) NOT NULL, "
+                + PLOT + " VARCHAR(255) NOT NULL, "
+                + DIRECTOR + " VARCHAR(255) NOT NULL);";
         db.execSQL(createTableQuery);
     }
 
